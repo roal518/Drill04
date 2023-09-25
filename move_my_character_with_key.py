@@ -1,20 +1,20 @@
 from pico2d import *
 
-TUK_WIDTH,TUK_HEIGHT = 1280, 1024
-open_canvas(TUK_WIDTH,TUK_HEIGHT)
+TUK_WIDTH, TUK_HEIGHT = 1280, 1024
+open_canvas(TUK_WIDTH, TUK_HEIGHT)
 tuk_ground = load_image('TUK_GROUND.PNG')
 IDLE_character = load_image('Woodcutter_idle.png')
 MOVE_character = load_image('Woodcutter_run.png')
-IDLE_character.clip_draw(0,0,100,102,50,190)
+# IDLE_character.clip_draw(0, 0, 100, 102, 50, 190)
 # x,y 좌표에서 캐릭터가 제대로 보이는 최솟값
-MOVE_character.clip_draw(0,0,100,102,1280,940)
+# MOVE_character.clip_draw(0, 0, 100, 102, 1280, 940)
 # x,y 좌표에서 캐릭터가 제대로 보이는 최댓값
 
 
-def arrived_End():
+def arrived_end():
     global running
-    global x,y
-    if 50 > x  or x > 1280:
+    global x, y
+    if 50 > x or x > 1280:
         running = False
     if 190 > y or y > 940:
         running = False
@@ -53,7 +53,6 @@ def handle_events():
             elif event.key == SDLK_DOWN:
                 ydir += 1
                 moving = False
-
 x = TUK_WIDTH//2
 y = TUK_HEIGHT//2
 running = True
@@ -64,7 +63,7 @@ runframe = 0
 idleframe = 0
 while running:
     clear_canvas()
-    tuk_ground.draw(TUK_WIDTH//2,TUK_HEIGHT//2)
+    tuk_ground.draw(TUK_WIDTH//2, TUK_HEIGHT//2)
     if moving:
         if xdir >= 0:
             MOVE_character.clip_draw(runframe*100, 0, 100, 102, x, y)
@@ -74,12 +73,12 @@ while running:
         IDLE_character.clip_draw(idleframe*100, 0, 100, 100, x, y)
     update_canvas()
     handle_events()
-    arrived_End()
+    arrived_end()
     x += xdir*5
     y += ydir*5
 
     idleframe = (runframe+1) % 4
     runframe = (runframe+1) % 6
-    delay(0.05)
+    delay(0.03)
 
 close_canvas()
