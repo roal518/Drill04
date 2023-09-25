@@ -10,6 +10,14 @@ IDLE_character.clip_draw(0,0,100,102,50,190)
 MOVE_character.clip_draw(0,0,100,102,1280,940)
 # x,y 좌표에서 캐릭터가 제대로 보이는 최댓값
 
+
+def arrived_End():
+    global running
+    global x,y
+    if 50 > x  or x > 1280:
+        running = False
+    if 190 > y or y > 940:
+        running = False
 def handle_events():
     global running, moving
     global xdir, ydir
@@ -63,9 +71,10 @@ while running:
         IDLE_character.clip_draw(idleframe*100, 0, 100, 100, x, y)
     update_canvas()
     handle_events()
+    arrived_End()
     x += xdir*5
     y += ydir*5
-    
+
     idleframe = (runframe+1) % 4
     runframe = (runframe+1) % 6
     delay(0.05)
