@@ -9,10 +9,12 @@ MOVING_character=load_image('Woodcutter_run.png')
 def handle_events():
     global running
     global x, y, delay
+
+
 running = True
 moving = True
 frame = 0
-x, y = TUK_WIDTH // 2 ,  TUK_HEIGHT // 2
+x, y = TUK_WIDTH // 2,  TUK_HEIGHT // 2
 hide_cursor()
 while running:
     clear_canvas()
@@ -21,3 +23,9 @@ while running:
         MOVING_character.clip_draw(frame*100)
     elif not moving:
         IDLE_character.clip_draw(frame*100)
+    update_canvas()
+    handle_events()
+    frame = (frame+1) % 8
+    delay(0.05)
+
+close_canvas()
