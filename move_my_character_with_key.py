@@ -66,7 +66,10 @@ while running:
     clear_canvas()
     tuk_ground.draw(TUK_WIDTH//2,TUK_HEIGHT//2)
     if moving:
-        MOVE_character.clip_draw(runframe*100, 0, 100, 102, x, y)
+        if xdir >= 0:
+            MOVE_character.clip_draw(runframe*100, 0, 100, 102, x, y)
+        elif xdir < 0:
+            MOVE_character.clip_composite_draw(runframe * 100, 0, 100, 100, 0, 'h', x, y,100,100)
     else:
         IDLE_character.clip_draw(idleframe*100, 0, 100, 100, x, y)
     update_canvas()
