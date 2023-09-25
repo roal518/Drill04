@@ -16,18 +16,26 @@ def handle_events():
     for event in events:
         if event.type == SDL_QUIT:
             running = False
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
-            running = False
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_LEFT:
-            xdir -=1
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_RIGHT:
-            xdir +=1
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_UP:
-            ydir += 1
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_DOWN:
-            ydir -= 1
-
-
+        elif event.type == SDL_KEYDOWN:
+            if event.key == SDLK_ESCAPE:
+                running = False
+            elif event.key == SDLK_LEFT:
+                xdir -=1
+            elif event.key == SDLK_RIGHT:
+                xdir +=1
+            elif event.key == SDLK_UP:
+                ydir += 1
+            elif event.key == SDLK_DOWN:
+                ydir -= 1
+        elif event.type == SDL_KEYUP:
+            if event.key == SDLK_LEFT:
+                xdir +=1
+            elif event.key == SDLK_RIGHT:
+                xdir -=1
+            elif event.key == SDLK_UP:
+                ydir -= 1
+            elif event.key == SDLK_DOWN:
+                ydir += 1
 x=TUK_WIDTH//2
 y=TUK_HEIGHT//2
 running = True
